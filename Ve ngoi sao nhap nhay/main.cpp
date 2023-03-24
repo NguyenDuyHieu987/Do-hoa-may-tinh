@@ -10,60 +10,65 @@ float d2r (int d){
     return d*PI/180.0;
 }
 
+int getRandomColor(){
+	return rand() % 15 + 1;
+}
+
 int main(){
     initwindow(840,840);
     int xc = 0, yc = 24, r = 20;
     int d = 270;
-    int j = 0;
-    int i = 0;
-    int dem = 0;
+    int star = 1;
+    
   	while(true)
   	{
-  		
-  		if(j == 101){
-  			j = 1;
+  		if(star == 101){
+//  			cleardevice();
+  			star = 1;
   			xc = 0; 
-			yc = 24; 
-			r = 20;
+			yc = 24;
+			d = 270; 
 		}
   
-	    for(j = 1; j<=100;j++){
-			if(j % 10 == 1 && j != 1){
+	    for(star = 1; star <= 100; star++){
+//	    	Xuong dong
+			if(star % 10 == 1 && star != 1){
 			   	yc += 70;
 				xc = 0;	
 			}
 			xc += 70;
-		
-	        for(i = 0; i<=5;i++){
+			
+		 	int color = getRandomColor();
+		 	
+	        for(int i = 0; i <= 5; i++){
 	        
 	            int x = xc + (int)(r * cos(d2r(d)));
 	            int y = yc + (int)(r * sin(d2r(d)));
-//	            cout<<"x: "<<x;
-//	            cout<<"y: "<<y;
-//	            cout<<endl;
+
 	            if (i == 0)
-	                moveto(x,y);
-	//	            int j = 0;
+            	{    
+					moveto(x,y);
+//   					lineto(x,y);
+	            }
 	            else
 	                lineto(x,y);
+//					line(x1,y1,x,y);
+				     
 	            d += 144;
 	            
-	            if(dem % 2 == 0 ){
-	            	setcolor(i+1);
-				}
-				else{
-					setcolor(i+3);
-				}
-//	             delay(1000);
+				setcolor(color);
+				
+		
+//	            delay(1000);
 	        }
-	     		    
-//	        delay(10);
-		}
-	
-		dem++;
-	
-	}
 
+//	        delay(100);
+		}
+			
+//		dem++;
+
+	}
+	
     getch();
     return 0;
 }
